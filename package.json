@@ -4,7 +4,8 @@
   "description": "A boilerplate with the basic container of a npm, expressjs and mongoDB app",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "star": "nodemon app.js"
   },
   "repository": {
     "type": "git",
