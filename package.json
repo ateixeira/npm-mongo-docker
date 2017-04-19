@@ -1,0 +1,24 @@
+{
+  "name": "npm-mongo-docker",
+  "version": "1.0.0",
+  "description": "A boilerplate with the basic container of a npm, expressjs and mongoDB app",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ateixeira/npm-mongo-docker.git"
+  },
+  "keywords": [
+    "Docker",
+    "Npm",
+    "MongoDB"
+  ],
+  "author": "André Teixeira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ateixeira/npm-mongo-docker/issues"
+  },
+  "homepage": "https://github.com/ateixeira/npm-mongo-docker#readme"
+}
