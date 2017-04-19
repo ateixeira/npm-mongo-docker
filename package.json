@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ateixeira/npm-mongo-docker#readme",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "nodemon": "^1.11.0"
   }
 }
