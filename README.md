@@ -9,3 +9,7 @@ docker build -t node-test:0.1 .
 ## Run container
 
 docker run -ti node-test:0.1 
+
+## Run container with docker-compose
+
+docker-compose up
