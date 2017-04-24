@@ -1,10 +1,12 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var http = require("http");
+import React from 'react';
+import express from 'express';
+import mongoose from 'mongoose';
+import { Server } from 'http';
 
+import { Provider } from 'react-redux';
 
 const app = express();
-const server = http.createServer(app);
+const server = new Server(app);
 const port = process.env.PORT || 3000;
 
 
