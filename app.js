@@ -1,6 +1,11 @@
 var express = require('express');
-var app = express();
 var mongoose = require('mongoose');
+var http = require("http");
+
+
+const app = express();
+const server = http.createServer(app);
+const port = process.env.PORT || 3000;
 
 
 // Development server configuration
@@ -30,6 +35,9 @@ app.get('/', function(req, res){
 
 
 //Server startup
-app.listen(3000, function(){
-  console.log('Example app listening on port 3000!');
+server.listen(port, err => {
+    if (err) {
+        return console.error(err);
+    }
+    console.info("Server running on port " + port);
 });
