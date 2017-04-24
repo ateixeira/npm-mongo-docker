@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "webpack-dev-server --progress"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/ateixeira/npm-mongo-docker#readme",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
     "express": "^4.15.2",
     "mongoose": "^4.9.5",
     "react": "^15.5.4",
