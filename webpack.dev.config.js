@@ -60,10 +60,6 @@ const devPlugins =  [
     new webpack.HotModuleReplacementPlugin(),
     // Avoid stopping the app execution on error
     new webpack.NoEmitOnErrorsPlugin(),
-    // Open the browser page
-    new OpenBrowserPlugin({
-        url: 'http://127.0.0.1:3000/'
-    }),
     // CSS Package
     new ExtractTextPlugin({
         filename: 'style.css',
