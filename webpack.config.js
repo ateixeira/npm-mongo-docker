@@ -76,8 +76,8 @@ module.exports = {
     devtool: devtool,
     entry: entry,
     output: {
-        path: __dirname + '/server',
-        filename: 'app.js',
+        path: __dirname + '/build',
+        filename: 'bundle.js',
     },
     module: {
         loaders: loaders

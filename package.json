@@ -24,7 +24,9 @@
   "homepage": "https://github.com/ateixeira/npm-mongo-docker#readme",
   "dependencies": {
     "express": "^4.15.2",
-    "mongoose": "^4.9.5"
+    "mongoose": "^4.9.5",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
     "extract-text-webpack-plugin": "^2.1.0",
