@@ -44,6 +44,12 @@ const loaders = [
         test: /\.(json)$/,
         exclude: /node_modules/,
         loader: 'json',
+    },{
+        loader: "sass-loader",
+        test: /\.scss$/,
+        options: {
+            includePaths: [path.resolve(__dirname, "./src/styles")]
+        }
     }
 ]
 
@@ -79,6 +85,5 @@ module.exports = {
     module: {
         loaders: loaders
     },
-    plugins: devPlugins,
-    sassLoader: sassLoader
+    plugins: devPlugins
 };
