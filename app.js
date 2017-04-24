@@ -1,9 +1,9 @@
 var express = require('express');
 var app = express();
-var mongoose = require(‘mongoose’);
+var mongoose = require('mongoose');
 
 // MongoDB setup
-mongoose.connect(“mongodb://mongo:27017”);
+mongoose.connect("mongodb://mongo:27017");
 
 //routes
 app.get('/', function(req, res){
