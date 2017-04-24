@@ -1,5 +1,6 @@
 import React from 'react';
 import express from 'express';
+import exphbs  from 'express-handlebars';
 import mongoose from 'mongoose';
 import { Server } from 'http';
 
@@ -31,6 +32,11 @@ if (process.env.NODE_ENV !== 'production') {
         publicPath: config.output.publicPath
     }))
 }
+
+
+// Templates configuration
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 
 // MongoDB setup
