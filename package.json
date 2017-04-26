@@ -33,6 +33,7 @@
     "express-handlebars": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "material-ui": "^1.0.0-alpha.11",
+    "material-ui-icons": "^1.0.0-alpha.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
