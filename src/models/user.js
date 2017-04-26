@@ -9,7 +9,7 @@ const SALT_WORK_FACTOR = 10;
 //===================================================================================================
 
 const UserSchema = new Schema({
-    username: { type: String, required: true, index: { unique: true } },
+    email: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true }
 });
 
@@ -19,8 +19,7 @@ const UserSchema = new Schema({
 //================================
 
 // Pre-saves user to database, hash of the password if it is new or was modified
-
-UserSchema.pre(save, function(next) {
+UserSchema.pre('save', function(next) {
     var user = this;
 
     // only hash the password if it has been modified (or is new)
@@ -45,7 +44,6 @@ UserSchema.pre(save, function(next) {
 
 
 // Compares passwords for login
-
 UserSchema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if (err) return cb(err);
@@ -53,4 +51,4 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
     });
 };
 
-module.exports = mongoose.model(User, UserSchema);
+module.exports = mongoose.model('User', UserSchema);

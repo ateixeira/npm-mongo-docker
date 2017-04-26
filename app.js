@@ -10,7 +10,9 @@ import { renderToString } from 'react-dom/server';
 
 import routes from './src/routes';
 import NotFoundPage from './src/components/notfoundpage';
-import configureStore from './src/configureStore'
+import configureStore from './src/configureStore';
+
+import User from './src/models/user'
 
 
 const app = express();
@@ -40,7 +42,31 @@ app.set('view engine', 'handlebars');
 
 
 // MongoDB setup
-mongoose.connect("mongodb://mongo:27017");
+mongoose.connect("mongodb://mongo:27017/teixeira");
+
+
+app.get('/signup', function(req, res) {
+
+    let newUser = new User({
+        email: "andre.teixeira@gmail.com",
+        password: "clarinha"
+    });
+
+    newUser.save(function(err) {
+        if (err) {
+            return res.json({
+              success: false,
+              code: err.code,
+              message: err.message
+            });
+        }
+        res.json({
+            success: true,
+            message: 'Usuário criado com sucesso.'
+        });
+    });
+
+});
 
 
 // Server side rendering shared components and shared routes
