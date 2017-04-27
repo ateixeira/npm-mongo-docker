@@ -13,7 +13,8 @@ class Main extends React.Component {
     render() {
         return (
             <div>
-                <LoginPage/>
+                <NavBar/>
+                <Content {...this.props} />
             </div>
 
         );
