@@ -1,9 +1,14 @@
 import React from 'react';
+import { fetchUsersIfNeeded } from '../actions/actionCreators';
 
 class Content extends React.Component {
 
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.fetchUsersIfNeeded()
     }
 
     render() {

@@ -1,20 +1,21 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as actionCreators from '../actions/actionCreators';
 import Main from '../components/main';
 
 function mapStateToProps(state, ownProps) {
-    const { foo } = state;
+    const { foo, isFetching } = state;
 
     return {
-	    foo
+	    foo,
+	    isFetching
   	}
 }
 
-function mapDispachToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch);
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators(actionCreators, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispachToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
