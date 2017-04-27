@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import {
-  SET_FOO, UNSET_FOO
+  SET_FOO, UNSET_FOO, RECEIVE_USERS, REQUEST_USERS
 } from '../actions/actionCreators'
 
 
@@ -19,8 +19,44 @@ export function foo(state = "bar", action) {
 }
 
 
+// USERS
+
+function users(state = {
+  isFetching: false,
+  items: []
+}, action) {
+  switch (action.type) {
+    case REQUEST_USERS:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case RECEIVE_USERS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        items: action.users,
+        lastUpdated: action.receivedAt
+      })
+    default:
+      return state
+  }
+}
+
+function usersList(state = {}, action) {
+    switch (action.type) {
+        case RECEIVE_USERS:
+        case REQUEST_USERS:
+            return Object.assign({}, state, {
+                ["users"]: users(state, action)
+            })
+        default:
+            return state
+    }
+}
+
+
 export const rootReducer = combineReducers({
   foo,
+  usersList,
   routing: routerReducer
 })
 
