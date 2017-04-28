@@ -8,11 +8,11 @@ import { Provider } from 'react-redux';
 import { match, RouterContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
 
-import routes from './src/routes';
-import NotFoundPage from './src/components/notfoundpage';
-import configureStore from './src/configureStore';
+import routes from '../routes';
+import NotFoundPage from '../components/notfoundpage';
+import configureStore from '../configureStore';
 
-import User from './src/models/user'
+import User from '../models/user'
 
 
 const app = express();
@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== 'production') {
     const webpack = require('webpack')
     const webpackDevMiddleware = require('webpack-dev-middleware')
     const webpackHotMiddleware = require('webpack-hot-middleware')
-    const config = require('./webpack.dev.config.js')
+    const config = require('../../webpack.dev.config.js')
     const compiler = webpack(config)
 
     app.use(webpackHotMiddleware(compiler))
