@@ -9,10 +9,15 @@ module.exports = function(app){
 
 	app.get('/api/users', function(req, res) {
 		User.find(function (err, users) {
-			console.log(users);
 			if (err) return next(err);
 			res.json(users);
 		});
+	});
+
+	app.post('/api/users', function(req, res) {
+		res.json({
+			"message": "POST de um novo usuário!!"
+		})
 	});
 
 }
