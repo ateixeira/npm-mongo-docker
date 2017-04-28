@@ -39,7 +39,7 @@ export function receiveUsers(json) {
 function fetchUsers() {
   	return dispatch => {
 	    dispatch(requestUsers())
-	    return fetch('/users')
+	    return fetch('/api/users/list')
 			.then(response => response.json())
 			.then(json => dispatch(receiveUsers(json)))
   	}
