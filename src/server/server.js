@@ -1,21 +1,21 @@
 import React from 'react';
-import express from 'express';
-import exphbs  from 'express-handlebars';
-import mongoose from 'mongoose';
 import { Server } from 'http';
 
 import { Provider } from 'react-redux';
 import { match, RouterContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
 
-import routes from '../routes';
-import NotFoundPage from '../components/notfoundpage';
+import server_config from './config';
+
 import configureStore from '../configureStore';
+import routes from '../routes';
 
-import User from '../models/user'
+import NotFoundPage from '../components/notfoundpage';
+
+// import User from '../models/user'
 
 
-const app = express();
+const app = server_config.app();
 const server = new Server(app);
 const port = process.env.PORT || 3000;
 
@@ -36,37 +36,32 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-// Templates configuration
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+// Connect to database
+server_config.conn_mongo();
 
 
-// MongoDB setup
-mongoose.connect("mongodb://mongo:27017/teixeira");
+// app.get('/signup', function(req, res) {
 
+//     let newUser = new User({
+//         email: "andre.teixeira@gmail.com",
+//         password: "clarinha"
+//     });
 
-app.get('/signup', function(req, res) {
+//     newUser.save(function(err) {
+//         if (err) {
+//             return res.json({
+//               success: false,
+//               code: err.code,
+//               message: err.message
+//             });
+//         }
+//         res.json({
+//             success: true,
+//             message: 'Usuário criado com sucesso.'
+//         });
+//     });
 
-    let newUser = new User({
-        email: "andre.teixeira@gmail.com",
-        password: "clarinha"
-    });
-
-    newUser.save(function(err) {
-        if (err) {
-            return res.json({
-              success: false,
-              code: err.code,
-              message: err.message
-            });
-        }
-        res.json({
-            success: true,
-            message: 'Usuário criado com sucesso.'
-        });
-    });
-
-});
+// });
 
 
 // Server side rendering shared components and shared routes
