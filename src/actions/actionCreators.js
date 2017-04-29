@@ -29,17 +29,19 @@ export function requestUsers() {
 }
 
 export function receiveUsers(json) {
-  return {
-    type: RECEIVE_USERS,
-    users: json.data.children.map(child => child.data),
-    receivedAt: Date.now()
-  }
+	console.log('json')
+	console.log(json)
+  	return {
+	    type: RECEIVE_USERS,
+	    users: json.map(child => child.data),
+	    receivedAt: Date.now()
+  	}
 }
 
 function fetchUsers() {
   	return dispatch => {
 	    dispatch(requestUsers())
-	    return fetch('/api/users/list')
+	    return fetch('/api/users/')
 			.then(response => response.json())
 			.then(json => dispatch(receiveUsers(json)))
   	}
