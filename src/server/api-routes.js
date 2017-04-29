@@ -40,4 +40,14 @@ module.exports = function(app){
         });
     });
 
+    app.delete('/api/users/:id', function(req, res) {
+        User.remove( req.params.id, function(err, doc) {
+            if (err) {
+                res.status(500).json(err.message);
+            } else {
+                res.status(200).json(doc);
+            }
+        });
+    });
+
 }
