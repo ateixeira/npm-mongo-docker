@@ -29,39 +29,37 @@ export function requestUsers() {
 }
 
 export function receiveUsers(json) {
-	console.log('json')
-	console.log(json)
-  	return {
-	    type: RECEIVE_USERS,
-	    users: json.map(child => child.data),
-	    receivedAt: Date.now()
-  	}
+    return {
+        type: RECEIVE_USERS,
+        users: json.map(child => child),
+        receivedAt: Date.now()
+    }
 }
 
 function fetchUsers() {
-  	return dispatch => {
-	    dispatch(requestUsers())
-	    return fetch('/api/users/')
-			.then(response => response.json())
-			.then(json => dispatch(receiveUsers(json)))
-  	}
+    return dispatch => {
+        dispatch(requestUsers())
+        return fetch('/api/users/')
+            .then(response => response.json())
+            .then(json => dispatch(receiveUsers(json)))
+    }
 }
 
 function shouldFetchUsers(state) {
-	const users = state.usersList
-	if (!users) {
-		return true
-	} else if (users.isFetching) {
-		return false
-	} else {
-		return true
-	}
+    const users = state.usersList
+    if (!users) {
+        return true
+    } else if (users.isFetching) {
+        return false
+    } else {
+        return true
+    }
 }
 
 export function fetchUsersIfNeeded() {
- 	return (dispatch, getState) => {
-	    if (shouldFetchUsers(getState())) {
-			return dispatch(fetchUsers())
-	    }
-  	}
+    return (dispatch, getState) => {
+        if (shouldFetchUsers(getState())) {
+            return dispatch(fetchUsers())
+        }
+    }
 }
