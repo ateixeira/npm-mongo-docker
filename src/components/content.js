@@ -1,6 +1,8 @@
 import React from 'react';
 import { fetchUsersIfNeeded } from '../actions/actionCreators';
 
+import UserItem from './userItem';
+
 class Content extends React.Component {
 
     constructor(props) {
@@ -12,6 +14,13 @@ class Content extends React.Component {
     }
 
     render() {
+
+        let items = []
+        if (this.props.usersList.users && this.props.usersList.users.isFetching == false) {
+            const usersList = this.props.usersList.users.items;
+            Object.keys(usersList).map((idx) => items.push(<UserItem key={idx} idx={idx} user={usersList[idx]}/>))
+        }
+
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -34,16 +43,7 @@ class Content extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>label</td>
-                                        <td>andre.teixeira@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>clarinha</td>
-                                        <td>mariaclara@linda.com</td>
-                                    </tr>
+                                    {items}
                                 </tbody>
                             </table>
                         </div>
