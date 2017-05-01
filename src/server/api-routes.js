@@ -11,7 +11,7 @@ module.exports = function(app){
      */
 
     app.get('/api/users', function(req, res) {
-        User.find(function (err, users) {
+        User.find({}, {password:0}).exec(function (err, users) {
             if (err) {
                 res.status(500).json(err.message);
             } else {
