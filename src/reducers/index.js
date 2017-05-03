@@ -46,7 +46,7 @@ function usersList(state = {}, action) {
         case RECEIVE_USERS:
         case REQUEST_USERS:
             return Object.assign({}, state, {
-                ["users"]: users(state, action)
+                ["users"]: users(state["users"], action)
             })
         default:
             return state

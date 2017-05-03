@@ -45,7 +45,7 @@ function fetchUsers() {
     }
 }
 
-function shouldFetchUsers(state) {
+export function shouldFetchUsers(state) {
     const users = state.usersList
     if (!users) {
         return true
