@@ -11,7 +11,7 @@ class Content extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchUsersIfNeeded()
+        this.props.fetchUsersIfNeeded();
     }
 
     render() {
@@ -49,7 +49,7 @@ class Content extends React.Component {
                             </table>
                         </div>
 
-                        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#createUserModal">
                             Create User
                         </button>
 
