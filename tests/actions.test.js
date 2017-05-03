@@ -10,4 +10,17 @@ describe('sync actions', () => {
     expect(shouldFetchUsers(state)).toEqual(true);
   });
 
+
+  it('shouldFetchUsers returns false when isFetching is true', () => {
+    const state = {
+      usersList: {
+        users: {
+          isFetching: true,
+        },
+      },
+    };
+
+    expect(shouldFetchUsers(state)).toBe(false);
+  });
+
 });

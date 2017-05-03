@@ -46,7 +46,7 @@ function fetchUsers() {
 }
 
 export function shouldFetchUsers(state) {
-    const users = state.usersList
+    const users = state.usersList['users']
     if (!users) {
         return true
     } else if (users.isFetching) {
