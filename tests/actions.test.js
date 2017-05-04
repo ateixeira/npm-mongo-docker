@@ -2,6 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import expect from 'expect';
+import mockDate from 'mockdate';
 
 import { shouldFetchUsers, fetchUsers } from '../src/actions/actionCreators';
 
@@ -39,8 +40,11 @@ describe('sync actions', () => {
 describe('async actions', () => {
 
     afterEach(() => {
-        nock.cleanAll()
+        nock.cleanAll();
+        mockDate.reset();
     })
+
+    mockDate.set(Date.now());
 
     it('creates RECEIVE_USERS when fetching users has been done', () => {
         nock('http://localhost:3000/')
@@ -49,7 +53,11 @@ describe('async actions', () => {
 
         const expectedActions = [
             { type: "REQUEST_USERS" },
-            { type: "RECEIVE_USERS", users: [{}, {}] }
+            { 
+                type: "RECEIVE_USERS", 
+                receivedAt: Date.now(), //mockDate 
+                users: [{}, {}] 
+            }
         ]
 
         const store = mockStore({ todos: [] })
