@@ -35,4 +35,31 @@ describe('sync actions', () => {
 });
 
 
+
+describe('async actions', () => {
+
+    afterEach(() => {
+        nock.cleanAll()
+    })
+
+    it('creates RECEIVE_USERS when fetching users has been done', () => {
+        nock('http://localhost:3000/')
+            .get('/api/users')
+            .reply(200, [{}, {}])
+
+        const expectedActions = [
+            { type: "REQUEST_USERS" },
+            { type: "RECEIVE_USERS", users: [{}, {}] }
+        ]
+
+        const store = mockStore({ todos: [] })
+
+
+        return store.dispatch(fetchUsers())
+            .then(() => { // return of async actions
+                expect(store.getActions()).toEqual(expectedActions)
+        })
+
+    })
+
 });
