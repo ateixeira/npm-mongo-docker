@@ -20,8 +20,7 @@ export function foo(state = "bar", action) {
 
 
 // USERS
-
-function users(state = {
+export function users(state = {
   isFetching: false,
   items: []
 }, action) {
@@ -53,7 +52,7 @@ function usersList(state = {}, action) {
     }
 }
 
-
+// ROOT REDUCER
 export const rootReducer = combineReducers({
   foo,
   usersList,
