@@ -1,5 +1,5 @@
 import { rootReducer, users } from '../src/reducers/index';
-import { requestUsers } from '../src/actions/actionCreators';
+import { requestUsers, receiveUsers } from '../src/actions/actionCreators';
 
 const DEFAULT_ACTION = { type: 'DEFAULT_ACTION' };
 
@@ -26,10 +26,22 @@ describe('users reducer', () => {
 	    });
   	})
 
+
     it('on REQUEST_USERS, sets isFetching to true', () => {
 	    const action = requestUsers();
 	    const nextState = users(defaultState(), action);
 	    expect(nextState.isFetching).toBe(true);
     });
+
+
+    it('on RECEIVE_USERS, unsets isFetching', () => {
+	    const state = defaultState();
+	    state.isFetching = true;
+
+	    const action = receiveUsers([]);
+
+	    const nextState = users(state, action);
+	    expect(nextState.isFetching).toBe(false);
+	});
 
 })
