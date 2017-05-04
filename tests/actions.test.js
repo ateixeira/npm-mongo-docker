@@ -49,14 +49,14 @@ describe('async actions', () => {
     it('creates RECEIVE_USERS when fetching users has been done', () => {
         nock('http://localhost:3000/')
             .get('/api/users')
-            .reply(200, [{}, {}])
+            .reply(200, [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}])
 
         const expectedActions = [
             { type: "REQUEST_USERS" },
             { 
                 type: "RECEIVE_USERS", 
                 receivedAt: Date.now(), //mockDate 
-                users: [{}, {}] 
+                users: [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}] 
             }
         ]
 
