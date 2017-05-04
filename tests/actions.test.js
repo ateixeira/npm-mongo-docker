@@ -46,7 +46,7 @@ describe('async actions', () => {
 
     mockDate.set(Date.now());
 
-    it('creates RECEIVE_USERS when fetching users has been done', () => {
+    it('dispatches RECEIVE_USERS when fetching users has been done', () => {
         nock('http://localhost:3000/')
             .get('/api/users')
             .reply(200, [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}])

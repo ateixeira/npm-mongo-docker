@@ -2,21 +2,8 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import {
-  SET_FOO, UNSET_FOO, RECEIVE_USERS, REQUEST_USERS
+  RECEIVE_USERS, REQUEST_USERS
 } from '../actions/actionCreators'
-
-
-// FOO
-export function foo(state = "bar", action) {
-  switch (action.type) {
-    case SET_FOO:
-      return action.foo
-    case UNSET_FOO:
-      return ""
-    default:
-      return state
-  }
-}
 
 
 // USERS
@@ -54,7 +41,6 @@ function usersList(state = {}, action) {
 
 // ROOT REDUCER
 export const rootReducer = combineReducers({
-  foo,
   usersList,
   routing: routerReducer
 })

@@ -1,8 +1,5 @@
 import fetch from 'isomorphic-fetch';
 
-export const SET_FOO = 'SET_FOO';
-export const UNSET_FOO = 'UNSET_FOO';
-
 export const REQUEST_USERS = 'REQUEST_USERS';
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 
@@ -12,21 +9,8 @@ const IS_TESTING = process.env.NODE_ENV === 'test';
 const API_USERS_URL = `${IS_TESTING ? 'http://localhost:3000' : ''}/api/users`;
 
 
-// FOO
-export function setFoo(foo) {
-  return {
-    type: SET_FOO,
-    foo
-  }
-}
-
-export function unsetFoo() {
-  return {
-    type: UNSET_FOO
-  }
-}
-
 // USERS
+// --> GET
 export function requestUsers() {
   return {
     type: REQUEST_USERS
