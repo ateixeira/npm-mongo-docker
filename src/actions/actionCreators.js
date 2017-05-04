@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 export const REQUEST_USERS = 'REQUEST_USERS';
 export const RECEIVE_USERS = 'RECEIVE_USERS';
+export const CREATE_USERS = 'CREATE_USERS';
 
 // Setting variables to use absolute urls on test fetches
 // Issue: http://stackoverflow.com/a/37968027/955183
@@ -51,4 +52,13 @@ export function fetchUsersIfNeeded() {
             return dispatch(fetchUsers())
         }
     }
+}
+
+
+// --> POST
+export function createUser(user_obj) {
+  return {
+    type: CREATE_USERS,
+    user_obj
+  }
 }
