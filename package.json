@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node src/server/server.js --presets es2015,stage-2",
-    "test": "jest",
+    "test": "NODE_ENV='test' jest",
     "test:watch": "npm test -- --watch"
   },
   "repository": {

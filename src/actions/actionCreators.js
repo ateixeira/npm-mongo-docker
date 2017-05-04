@@ -6,6 +6,11 @@ export const UNSET_FOO = 'UNSET_FOO';
 export const REQUEST_USERS = 'REQUEST_USERS';
 export const RECEIVE_USERS = 'RECEIVE_USERS';
 
+// Setting variables to use absolute urls on test fetches
+// Issue: http://stackoverflow.com/a/37968027/955183
+const IS_TESTING = process.env.NODE_ENV === 'test';
+const API_USERS_URL = `${IS_TESTING ? 'http://localhost:3000' : ''}/api/users`;
+
 
 // FOO
 export function setFoo(foo) {
@@ -36,10 +41,10 @@ export function receiveUsers(json) {
     }
 }
 
-function fetchUsers() {
+export function fetchUsers() {
     return dispatch => {
         dispatch(requestUsers())
-        return fetch('/api/users/')
+        return fetch(API_USERS_URL)
             .then(response => response.json())
             .then(json => dispatch(receiveUsers(json)))
     }
