@@ -44,4 +44,13 @@ describe('users reducer', () => {
 	    expect(nextState.isFetching).toBe(false);
 	});
 
+	it('on RECEIVE_USERS, sets state.items to action.users', () => {
+	    const state = defaultState();
+	    const action = receiveUsers([]);
+
+	    const nextState = users(state, action);
+
+	    expect(nextState.items).toEqual(action.users);
+	});
+
 })
