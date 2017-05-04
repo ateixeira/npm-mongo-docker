@@ -53,7 +53,7 @@ class Content extends React.Component {
                             Create User
                         </button>
 
-                        <UserModal />
+                        <UserModal {...this.props}/>
                     </main>
                 </div>
             </div>
