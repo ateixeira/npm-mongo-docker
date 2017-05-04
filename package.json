@@ -54,8 +54,12 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-jest": "^19.0.0",
+    "expect": "^1.20.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "jest": "^19.0.2",
+    "nock": "^9.0.13",
+    "redux-mock-store": "^1.2.3",
+    "redux-thunk": "^2.2.0",
     "webpack": "^2.4.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-hot-middleware": "^2.18.0"
