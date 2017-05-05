@@ -20,10 +20,34 @@ module.exports = function(app){
         });
     });
 
-    app.post('/api/users', function(req, res) {
-        res.json({
-            "message": "POST de um novo usuário!!"
-        })
+    app.post('/api/users', (req, res) => {
+        if (!req.body.email || !req.body.password) {
+            res.json({
+                success: false,
+                message: 'Entre com um e-mail e o seu password.'
+            });
+        } else {
+            let newUser = new User({
+                name: req.body.name,
+                lastname: req.body.lastname,
+                email: req.body.email,
+                username: req.body.username,
+                password: req.body.password,
+                website: req.body.website
+            });
+            newUser.save((err) => {
+                if (err) {
+                    return res.json({
+                      success: false,
+                      message: err.message
+                    });
+                }
+                res.json({
+                    success: true,
+                    message: 'Usuário criado com sucesso.'
+                });
+            });
+        }
     });
 
 
@@ -51,6 +75,17 @@ module.exports = function(app){
                 res.status(200).json(user);
             }
         });
+    });
+
+    app.put('/api/users/:id', function(req, res) {
+
+        let update_doc = req.body;
+        delete update_doc._id;
+        
+        // User.findOneAndUpdate(query, req.newData, {upsert:true}, function(err, doc){
+        //     if (err) return res.send(500, { error: err });
+        //     return res.send("succesfully saved");
+        // });
     });
 
 }
