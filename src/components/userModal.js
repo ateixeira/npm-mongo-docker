@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { insertUser } from '../actions/actionCreators';
 
 class UserModal extends React.Component {
 
@@ -11,7 +11,18 @@ class UserModal extends React.Component {
         const name = document.getElementById("name").value;
         const lastName = document.getElementById("lastName").value;
         const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
         const website = document.getElementById("website").value;
+
+        let new_user = {};
+            new_user.name = name;
+            new_user.lastName = lastName;
+            new_user.email = email;
+            new_user.username = email.substr(0, email.indexOf('@'));
+            new_user.password = password;
+            new_user.website = website;
+
+        this.props.insertUser(new_user);
     }
 
     render() {
@@ -33,20 +44,24 @@ class UserModal extends React.Component {
                                         <div className="row">
                                             <div className="col-sm-6 form-group">
                                                 <label>First Name</label>
-                                                <input type="text" id="name" placeholder="Enter First Name Here.." className="form-control" />
+                                                <input type="text" id="name" placeholder="Enter First Name here.." className="form-control" />
                                             </div>
                                             <div className="col-sm-6 form-group">
                                                 <label>Last Name</label>
-                                                <input type="text" id="lastName" placeholder="Enter Last Name Here.." className="form-control" />
+                                                <input type="text" id="lastName" placeholder="Enter Last Name here.." className="form-control" />
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label>Email Address</label>
-                                            <input type="text" id="email" placeholder="Enter Email Address Here.." className="form-control" />
+                                            <input type="text" id="email" placeholder="Enter Email Address here.." className="form-control" />
+                                        </div>  
+                                        <div className="form-group">
+                                            <label>Password</label>
+                                            <input type="password" id="password" placeholder="Enter Password here.." className="form-control" />
                                         </div>  
                                         <div className="form-group">
                                             <label>Website</label>
-                                            <input type="text" id="website" placeholder="Enter Website Name Here.." className="form-control" />
+                                            <input type="text" id="website" placeholder="Enter Website Name here.." className="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +69,7 @@ class UserModal extends React.Component {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal" >Close</button>
-                            <button type="button" className="btn btn-primary" onClick={this.handleSubmit} >Save changes</button>
+                            <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)} >Save changes</button>
                         </div>
                     </div>
                 </div>
