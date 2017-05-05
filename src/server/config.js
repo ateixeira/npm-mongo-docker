@@ -1,6 +1,7 @@
 import path from 'path';
 import express from 'express';
 import exphbs  from 'express-handlebars';
+import bodyParser from 'body-parser';
 
 import mongoose from 'mongoose';
 
@@ -17,6 +18,9 @@ module.exports = {
         app.engine('handlebars', exphbs({defaultLayout: 'main'}));
         app.set('view engine', 'handlebars');
 
+        app.use(bodyParser.urlencoded({ extended: false }))
+        app.use(bodyParser.json())
+        
         return app
     },
     
