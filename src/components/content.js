@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchUsersIfNeeded } from '../actions/actionCreators';
+import { fetchUsers } from '../actions/actionCreators';
 
 import UserItem from './userItem';
 import UserModal from './userModal';
@@ -11,7 +11,7 @@ class Content extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchUsersIfNeeded();
+        this.props.fetchUsers();
     }
 
     render() {
