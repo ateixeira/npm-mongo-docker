@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 
-export const REQUEST_USERS = 'REQUEST_USERS';
-export const RECEIVE_USERS = 'RECEIVE_USERS';
+export const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
+export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
+export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 
 export const CREATE_USER = 'CREATE_USER';
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
@@ -16,26 +17,33 @@ const API_USERS_URL = `${IS_TESTING ? 'http://localhost:3000' : ''}/api/users`;
 
 // USERS
 // --> GET
-export function requestUsers() {
-  return {
-    type: REQUEST_USERS
-  }
+export function fetchUsersRequest() {
+    return {
+        type: FETCH_USERS_REQUEST
+    };
 }
 
-export function receiveUsers(json) {
+export function fetchUsersSuccess(users) {
     return {
-        type: RECEIVE_USERS,
-        users: json.map(child => child),
-        receivedAt: Date.now()
-    }
+        type: FETCH_USERS_SUCCESS,
+        payload: { users }
+    };
+}
+
+export function fetchUsersFailure(err) {
+    return {
+        type: FETCH_USERS_FAILURE,
+        payload: { err }
+    };
 }
 
 export function fetchUsers() {
     return dispatch => {
-        dispatch(requestUsers())
+        dispatch(fetchUsersRequest());
         return fetch(API_USERS_URL)
             .then(response => response.json())
-            .then(json => dispatch(receiveUsers(json)))
+            .then(json => dispatch(fetchUsersSuccess(json)))
+                .catch(err => dispatch(fetchUsersFailure(err)))
     }
 }
 
