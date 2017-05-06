@@ -2,46 +2,40 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import {
-  RECEIVE_USERS, REQUEST_USERS
+  FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS
 } from '../actions/actionCreators'
 
+// INITIAL STATE
+const initialState = {
+    list: [],
+    isCreatingUser: false,
+    isFetchingUser: false,
+    createUserFailureMessage: undefined
+};
 
-// USERS
-export function users(state = {
-  isFetching: false,
-  items: []
-}, action) {
-  switch (action.type) {
-    case REQUEST_USERS:
-      return Object.assign({}, state, {
-        isFetching: true
-      })
-    case RECEIVE_USERS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        items: action.users,
-        lastUpdated: action.receivedAt
-      })
-    default:
-      return state
-  }
-}
-
-function usersList(state = {}, action) {
-    switch (action.type) {
-        case RECEIVE_USERS:
-        case REQUEST_USERS:
-            return Object.assign({}, state, {
-                ["users"]: users(state["users"], action)
-            })
+function userReducer(state = initialState, action) {
+    const { type, payload } = action;
+    switch (type) {
+        case FETCH_USERS_REQUEST:
+            return {
+                ...state,
+                isFetchingUser: true
+            };
+        case FETCH_USERS_SUCCESS:
+            return {
+                ...state,
+                list: payload.users,
+                isFetchingUser: false
+            };
         default:
-            return state
-    }
+            return state;
+    } 
 }
+
 
 // ROOT REDUCER
 export const rootReducer = combineReducers({
-  usersList,
+  userReducer,
   routing: routerReducer
 })
 
