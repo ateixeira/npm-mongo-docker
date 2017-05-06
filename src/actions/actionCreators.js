@@ -2,8 +2,11 @@ import fetch from 'isomorphic-fetch';
 
 export const REQUEST_USERS = 'REQUEST_USERS';
 export const RECEIVE_USERS = 'RECEIVE_USERS';
-export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+
 export const CREATE_USER = 'CREATE_USER';
+export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
 
 // Setting variables to use absolute urls on test fetches
 // Issue: http://stackoverflow.com/a/37968027/955183
@@ -58,22 +61,29 @@ export function fetchUsersIfNeeded() {
 
 // --> POST
 
-export function createUser() {
+export function createUserRequest() {
   return {
-    type: CREATE_USER
+    type: CREATE_USER_REQUEST
   }
 }
 
 export function createUserSuccess(user) {
   return {
     type: CREATE_USER_SUCCESS,
-    user
+    payload: { user }
   }
 }
 
-export function insertUser(user_obj) {
+export function createUserFailure(err) {
+  return {
+    type: CREATE_USER_FAILURE,
+    payload: { err }
+  }
+}
+
+export function createUser(user_obj) {
     return dispatch => {
-        dispatch(createUser(user_obj))
+        dispatch(createUserRequest())
         return fetch(API_USERS_URL, {
           method: "POST",
           headers: {
@@ -81,7 +91,7 @@ export function insertUser(user_obj) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(user_obj)
-        }).then(response => response.json())
-            .then(json => dispatch(createUserSuccess(json)))
+        }).then(response => dispatch(createUserSuccess(response.data)))
+            .catch(err => dispatch(createUserFailure(err.response.data)))
     }
 }
