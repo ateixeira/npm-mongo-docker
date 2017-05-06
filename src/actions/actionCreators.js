@@ -47,25 +47,6 @@ export function fetchUsers() {
     }
 }
 
-export function shouldFetchUsers(state) {
-    const users = state.usersList['users']
-    if (!users) {
-        return true
-    } else if (users.isFetching) {
-        return false
-    } else {
-        return true
-    }
-}
-
-export function fetchUsersIfNeeded() {
-    return (dispatch, getState) => {
-        if (shouldFetchUsers(getState())) {
-            return dispatch(fetchUsers())
-        }
-    }
-}
-
 
 // --> POST
 
