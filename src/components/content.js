@@ -17,8 +17,8 @@ class Content extends React.Component {
     render() {
 
         let items = []
-        if (this.props.usersList.users && this.props.usersList.users.isFetching == false) {
-            const usersList = this.props.usersList.users.items;
+        if (this.props.userReducer && this.props.userReducer.isFetchingUser == false) {
+            const usersList = this.props.userReducer.list;
             Object.keys(usersList).map((idx) => items.push(<UserItem key={idx} idx={idx} user={usersList[idx]}/>))
         }
 
