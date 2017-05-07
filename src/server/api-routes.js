@@ -42,10 +42,7 @@ module.exports = function(app){
                       message: err.message
                     });
                 }
-                res.json({
-                    success: true,
-                    message: 'Usuário criado com sucesso.'
-                });
+                res.json(newUser);
             });
         }
     });

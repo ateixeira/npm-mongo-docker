@@ -80,7 +80,8 @@ export function createUser(user_obj) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(user_obj)
-        }).then(response => dispatch(createUserSuccess(response.data)))
+        }).then(response => response.json())
+            .then(json => dispatch(createUserSuccess(json)))
             .catch(err => dispatch(createUserFailure(err.response.data)))
     }
 }

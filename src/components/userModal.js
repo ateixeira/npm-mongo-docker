@@ -1,5 +1,5 @@
 import React from 'react';
-import { insertUser } from '../actions/actionCreators';
+import { createUser } from '../actions/actionCreators';
 
 class UserModal extends React.Component {
 
@@ -22,7 +22,7 @@ class UserModal extends React.Component {
             new_user.password = password;
             new_user.website = website;
 
-        this.props.insertUser(new_user);
+        this.props.createUser(new_user);
     }
 
     render() {
