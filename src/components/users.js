@@ -17,7 +17,6 @@ class Users extends React.Component {
     }
 
     render() {
-        console.log(this.props)
 
         let items = []
         if (this.props.userReducer && this.props.userReducer.isFetchingUser == false) {

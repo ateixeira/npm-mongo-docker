@@ -4,9 +4,9 @@ import bcrypt from "bcrypt-nodejs";
 const Schema = mongoose.Schema;
 const SALT_WORK_FACTOR = 10;
 
-//===================================================================================================
-// User Schema -- From https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
-//===================================================================================================
+//=======================================================================================================
+// User Schema -- Based on https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
+//=======================================================================================================
 
 const UserSchema = new Schema({
     email: { type: String, required: true, index: { unique: true } },
