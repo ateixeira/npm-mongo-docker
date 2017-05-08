@@ -10,33 +10,6 @@ const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
 
 
-describe('sync actions', () => {
-    it('shouldFetchUsers returns true when users are not yet loaded on usersList', () => {
-        const state = {
-            usersList: {
-            },
-        };
-
-        expect(shouldFetchUsers(state)).toEqual(true);
-    });
-
-
-  it('shouldFetchUsers returns false when isFetching is true', () => {
-    const state = {
-        usersList: {
-            users: {
-                isFetching: true,
-            },
-        },
-    };
-
-    expect(shouldFetchUsers(state)).toBe(false);
-  });
-
-});
-
-
-
 describe('async actions', () => {
 
     afterEach(() => {
@@ -46,21 +19,22 @@ describe('async actions', () => {
 
     mockDate.set(Date.now());
 
-    it('dispatches RECEIVE_USERS when fetching users has been done', () => {
+    it('dispatches FETCH_USERS_SUCCESS when fetching users has been done successfully', () => {
         nock('http://localhost:3000/')
             .get('/api/users')
             .reply(200, [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}])
 
         const expectedActions = [
-            { type: "REQUEST_USERS" },
+            { type: "FETCH_USERS_REQUEST" },
             { 
-                type: "RECEIVE_USERS", 
-                receivedAt: Date.now(), //mockDate 
-                users: [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}] 
+                payload: {
+                    users: [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}] 
+                },
+                type: "FETCH_USERS_SUCCESS"
             }
         ]
 
-        const store = mockStore({ todos: [] })
+        const store = mockStore({ users: [] })
 
 
         return store.dispatch(fetchUsers())
