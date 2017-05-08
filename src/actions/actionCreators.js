@@ -9,10 +9,31 @@ export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST';
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
 export const CREATE_USER_FAILURE = 'CREATE_USER_FAILURE';
 
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+
 // Setting variables to use absolute urls on test fetches
 // Issue: http://stackoverflow.com/a/37968027/955183
 const IS_TESTING = process.env.NODE_ENV === 'test';
 const API_USERS_URL = `${IS_TESTING ? 'http://localhost:3000' : ''}/api/users`;
+
+// MODALS
+export function showModal(modalType, modalProps, showModal=true) {
+  return{
+    type: SHOW_MODAL,
+    modalType,
+    modalProps,
+    showModal
+  }
+}
+
+export function hideModal(modalProps, showModal=false) {
+  return {
+    type: HIDE_MODAL,
+    modalProps,
+    showModal
+  }
+}
 
 
 // USERS

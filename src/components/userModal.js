@@ -1,6 +1,8 @@
 import React from 'react';
 import { createUser } from '../actions/actionCreators';
 
+import { Modal, Button } from 'react-bootstrap';
+
 class UserModal extends React.Component {
 
     constructor(props) {
@@ -23,57 +25,50 @@ class UserModal extends React.Component {
             new_user.website = website;
 
         this.props.createUser(new_user);
+        this.props.hideModal();
     }
 
     render() {
-        return (
-            <div className="modal fade" id="createUserModal" tabIndex="-1" role="dialog" aria-labelledby="createUserModalLabel" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="createUserModalLabel">Create User</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <form id="sendmail" data-async  method="post" role="form" className="form-horizontal">
 
-                                <div className="container">
-                                    <div className="col-lg-12 well">
-                                        <div className="row">
-                                            <div className="col-sm-6 form-group">
-                                                <label>First Name</label>
-                                                <input type="text" id="name" placeholder="Enter First Name here.." className="form-control" />
-                                            </div>
-                                            <div className="col-sm-6 form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" id="lastName" placeholder="Enter Last Name here.." className="form-control" />
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label>Email Address</label>
-                                            <input type="text" id="email" placeholder="Enter Email Address here.." className="form-control" />
-                                        </div>  
-                                        <div className="form-group">
-                                            <label>Password</label>
-                                            <input type="password" id="password" placeholder="Enter Password here.." className="form-control" />
-                                        </div>  
-                                        <div className="form-group">
-                                            <label>Website</label>
-                                            <input type="text" id="website" placeholder="Enter Website Name here.." className="form-control" />
-                                        </div>
+        return (
+            <Modal show={this.props.modal.showModal} bsSize="large" aria-labelledby="contained-modal-title-lg" id="createUserModal">
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form id="sendmail" data-async  method="post" role="form" className="form-horizontal">
+                        <div className="container">
+                            <div className="col-lg-12 well">
+                                <div className="row">
+                                    <div className="col-sm-6 form-group">
+                                        <label>First Name</label>
+                                        <input type="text" id="name" placeholder="Enter First Name here.." className="form-control" />
+                                    </div>
+                                    <div className="col-sm-6 form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" id="lastName" placeholder="Enter Last Name here.." className="form-control" />
                                     </div>
                                 </div>
-                            </form>
+                                <div className="form-group">
+                                    <label>Email Address</label>
+                                    <input type="text" id="email" placeholder="Enter Email Address here.." className="form-control" />
+                                </div>  
+                                <div className="form-group">
+                                    <label>Password</label>
+                                    <input type="password" id="password" placeholder="Enter Password here.." className="form-control" />
+                                </div>  
+                                <div className="form-group">
+                                    <label>Website</label>
+                                    <input type="text" id="website" placeholder="Enter Website Name here.." className="form-control" />
+                                </div>
+                            </div>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal" >Close</button>
-                            <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)} >Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button bsStyle="primary" onClick={this.handleSubmit.bind(this)}>Save User</Button>
+                </Modal.Footer>
+            </Modal>
         );
     }
 }

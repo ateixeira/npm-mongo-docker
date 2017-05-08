@@ -6,11 +6,12 @@ import * as actionCreators from '../actions/actionCreators';
 import Main from '../components/main';
 
 function mapStateToProps(state, ownProps) {
-    const { isFetching, userReducer } = state;
+    const { isFetching, userReducer, modal } = state;
 
     return {
 	    isFetching,
-	    userReducer
+	    userReducer,
+	    modal
   	}
 }
 

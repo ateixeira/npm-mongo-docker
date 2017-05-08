@@ -7,14 +7,37 @@ import {
 } from '../actions/actionCreators'
 
 // INITIAL STATE
-const initialState = {
+const modalInitialState = {
+    modalType: null,
+    modalProps: {},
+    showModal: false
+};
+
+const userInitialState = {
     list: [],
     isCreatingUser: false,
     isFetchingUser: false,
     createUserFailureMessage: undefined
 };
 
-function userReducer(state = initialState, action) {
+// MODAL
+function modal(state = modalInitialState, action) {
+  switch (action.type) {
+    case 'SHOW_MODAL':
+      return {
+        modalType: action.modalType,
+        modalProps: action.modalProps,
+        showModal: action.showModal
+      }
+    case 'HIDE_MODAL':
+      return modalInitialState
+    default:
+      return state
+  }
+}
+
+// USER
+function userReducer(state = userInitialState, action) {
     const { type, payload } = action;
 
     switch (type) {
@@ -50,6 +73,7 @@ function userReducer(state = initialState, action) {
 // ROOT REDUCER
 export const rootReducer = combineReducers({
   userReducer,
+  modal,
   routing: routerReducer
 })
 
