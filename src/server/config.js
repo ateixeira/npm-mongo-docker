@@ -25,7 +25,7 @@ module.exports = {
     },
     
     conn_mongo: function () {
-        const mongo_url = process.env.MONGO_URL || 'mongodb://localhost:27017/teixeira'
+        const mongo_url = process.env.MONGO_URL || 'mongodb://mongo:27017/teixeira'
 
         mongoose.connect(mongo_url, (error) => {
             if (error) {
