@@ -1,7 +1,7 @@
 import React from 'react';
 import { createUser } from '../actions/actionCreators';
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Grid, Row, Col, Button } from 'react-bootstrap';
 
 class UserModal extends React.Component {
 
@@ -36,33 +36,38 @@ class UserModal extends React.Component {
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form id="sendmail" data-async  method="post" role="form" className="form-horizontal">
-                        <div className="container">
-                            <div className="col-lg-12 well">
-                                <div className="row">
-                                    <div className="col-sm-6 form-group">
-                                        <label>First Name</label>
-                                        <input type="text" id="name" placeholder="Enter First Name here.." className="form-control" />
-                                    </div>
-                                    <div className="col-sm-6 form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" id="lastName" placeholder="Enter Last Name here.." className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="form-group">
+                    <form id="sendmail" data-async  method="post" role="form" className="form-group">
+
+                        <Col lg={12} bsClass="well">
+                            <Row>
+                                <Col sm={6} md={6} lg={6}>
+                                    <label>First Name</label>
+                                    <input type="text" id="name" placeholder="Enter First Name here.." className="form-control" />
+                                </Col>
+                                <Col sm={6} md={6} lg={6}>
+                                    <label>Last Name</label>
+                                    <input type="text" id="lastName" placeholder="Enter Last Name here.." className="form-control" />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={12} lg={12}>
                                     <label>Email Address</label>
                                     <input type="text" id="email" placeholder="Enter Email Address here.." className="form-control" />
-                                </div>  
-                                <div className="form-group">
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={12} lg={12}>
                                     <label>Password</label>
                                     <input type="password" id="password" placeholder="Enter Password here.." className="form-control" />
-                                </div>  
-                                <div className="form-group">
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12} md={12} lg={12}>
                                     <label>Website</label>
                                     <input type="text" id="website" placeholder="Enter Website Name here.." className="form-control" />
-                                </div>
-                            </div>
-                        </div>
+                                </Col>
+                            </Row> 
+                        </Col>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
