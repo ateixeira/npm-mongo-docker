@@ -4,7 +4,7 @@ import nock from 'nock';
 import expect from 'expect';
 import mockDate from 'mockdate';
 
-import { shouldFetchUsers, fetchUsers } from '../src/actions/actionCreators';
+import { fetchUsers, createUser } from '../src/actions/actionCreators';
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)
@@ -42,6 +42,32 @@ describe('async actions', () => {
                 expect(store.getActions()).toEqual(expectedActions)
         })
 
+    })
+
+
+    it('dispatches CREATE_USER_SUCCESS when create user has been done successfully', () => {
+        nock('http://localhost:3000/')
+            .post('/api/users')
+            .reply(200, [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}])
+
+
+        const expectedActions = [
+            { type: "CREATE_USER_REQUEST" },
+            { 
+                payload: {
+                    user: [{"_id":"123456","username":"user.name","email":"mock@user.com","__v":0}] 
+                },
+                type: "CREATE_USER_SUCCESS"
+            }
+        ]
+
+        const store = mockStore({ users: [] })
+
+
+        return store.dispatch(createUser())
+            .then(() => { // return of async actions
+                expect(store.getActions()).toEqual(expectedActions)
+        })
     })
 
 });
