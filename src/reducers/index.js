@@ -37,7 +37,7 @@ function modal(state = modalInitialState, action) {
 }
 
 // USER
-function userReducer(state = userInitialState, action) {
+export function userReducer(state = userInitialState, action) {
     const { type, payload } = action;
 
     switch (type) {
