@@ -12,7 +12,7 @@ class Content extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                {React.cloneElement({...this.props}.children, {...this.props})}
+                { React.cloneElement({...this.props}.children, {...this.props}) }
             </div>
         );
     }
