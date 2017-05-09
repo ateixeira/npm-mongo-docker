@@ -8,7 +8,15 @@ class LoginPage extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.login();
+
+        const email = document.getElementById("inputEmail").value;
+        const password = document.getElementById("inputPassword").value;
+
+        let auth_obj = {};
+            auth_obj.email = email;
+            auth_obj.password = password;
+
+        this.props.login(auth_obj);
     }
 
     render() {
