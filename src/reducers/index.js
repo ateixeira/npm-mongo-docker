@@ -52,7 +52,6 @@ export function auth(state = authInitialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case FETCH_USERS_REQUEST:
         default:
             return state;
     } 

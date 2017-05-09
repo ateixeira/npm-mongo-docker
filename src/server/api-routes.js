@@ -1,9 +1,51 @@
-import User from '../models/user';
 import ObjectID from 'mongodb';
+import jwt from 'jsonwebtoken';
+
+import config from './config';
+import User from '../models/user';
 
 var USERS_COLLECTION = "users";
 
 module.exports = function(app){
+
+
+
+    /*  "/api/auth/"
+     *    POST: verify credentials and authenticate user
+     */
+
+    app.post('/auth', function(req, res) {
+        User.findOne({
+            email: req.body.email
+        }, (err, user) => {
+
+            if (!user) {
+                res.send({
+                  success: false,
+                  message: 'A autenticação falhou. Usuário não encontrado.'
+                });
+            } else {
+                // COMPARE PASSWORD
+                user.comparePassword(req.body.password, (err, isMatch) => {
+                    if (isMatch && !err) {
+                        var token = jwt.sign(user, config.auth.secret, {
+                            expiresIn: "2 days"
+                        });
+                        res.json({
+                            success: true,
+                            message: 'Usuário autenticado com sucesso.',
+                            token
+                        });
+                    } else {
+                        res.send({
+                            success: false,
+                            message: 'A autenticação falhou. O password não confere.'
+                        });
+                    }
+                });
+            }
+        })
+    });
 
     /*  "/api/users"
      *    GET: finds all users
