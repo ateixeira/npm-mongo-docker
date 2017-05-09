@@ -22,9 +22,9 @@ export const getRoutes = (store) => {
 
 	return (
 		<Route path="/" component={App}>
-			<IndexRoute component={Users} onEnter={authRequired} />
-			<Route path="/main" component={Main}/>
-			<Route path="/users" component={Users} onEnter={authRequired} />
+			<Route component={Users} onEnter={authRequired} >
+				<Route path="/users" component={Users} onEnter={authRequired} />
+			</Route>	
 			<Route path="/login" component={Login}/>
 		</Route>
 	)

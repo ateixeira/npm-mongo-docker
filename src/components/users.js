@@ -31,6 +31,7 @@ class Users extends React.Component {
                     <Table striped responsive>
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>#</th>
                                 <th>Username</th>
                                 <th>E-mail</th>
