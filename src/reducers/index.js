@@ -7,6 +7,15 @@ import {
 } from '../actions/actionCreators'
 
 // INITIAL STATE
+const applicationInitialState = {
+    token: null,
+    locale: 'en',
+    user: {
+      permissions: []
+    },
+    error: null
+};
+
 const modalInitialState = {
     modalType: null,
     modalProps: {},
@@ -35,6 +44,18 @@ function modal(state = modalInitialState, action) {
       return state
   }
 }
+
+
+// APP
+export function application(state = applicationInitialState, action) {
+    const { type, payload } = action;
+
+    switch (type) {
+        default:
+            return state;
+    } 
+}
+
 
 // USER
 export function userReducer(state = userInitialState, action) {
@@ -73,6 +94,7 @@ export function userReducer(state = userInitialState, action) {
 // ROOT REDUCER
 export const rootReducer = combineReducers({
   userReducer,
+  application,
   modal,
   routing: routerReducer
 })
