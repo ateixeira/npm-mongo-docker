@@ -1,5 +1,4 @@
 import React from 'react';
-import { fetchUsers } from '../actions/actionCreators';
 
 import UserItem from './userItem';
 import UserModal from './userModal';

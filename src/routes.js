@@ -11,7 +11,7 @@ export const getRoutes = (store) => {
 	const authRequired = (nextState, replaceState) => {
 		const state = store.getState();
 
-		if (!state.application.isAuthenticated) {
+		if (!state.auth.isAuthenticated) {
 	      	// Not authenticated, redirect to login.
 	      	replaceState({
   				pathname: '/login',
@@ -22,9 +22,9 @@ export const getRoutes = (store) => {
 
 	return (
 		<Route path="/" component={App}>
-			<Route component={Users} onEnter={authRequired} >
-				<Route path="/users" component={Users} onEnter={authRequired} />
-			</Route>	
+			<Route component={Users} onEnter={authRequired} />
+			<Route path="/main" component={Main}/>
+			<Route path="/users" component={Users} onEnter={authRequired} />
 			<Route path="/login" component={Login}/>
 		</Route>
 	)

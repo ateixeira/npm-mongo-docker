@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+import { push } from 'react-router-redux';
+
 export const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
@@ -139,4 +141,36 @@ export function hideModal(modalProps, showModal=false) {
             message
         }
     }
-    
+
+    export function login(login_obj) {
+        console.log("login_obj");
+        console.log(login_obj);
+
+        let config = {
+            method: 'POST',
+            headers: { 'Content-Type':'application/x-www-form-urlencoded' },
+            body: 'email='+login_obj.email+'&password='+login_obj.password
+        }
+
+        return dispatch => {
+            // Request Login call
+            dispatch(requestLogin(login_obj))
+
+            return fetch('/auth/', config)
+                .then(response =>
+                    response.json().then(user => ({ user, response }))
+                    ).then(({ user, response }) =>  {
+                        if (user.success) {
+                          // Login com sucesso, setando o token e fazendo o dispatch de email recebido
+                          localStorage.setItem('id_token', user.id_token)
+                          dispatch(receiveLogin(user))
+                          dispatch(push('/users'));
+
+                        } else {
+                          // Erro, vamos atualizar o status com loginError
+                          dispatch(loginError(user.message))
+                          return Promise.reject(user)
+                        }
+                    }).catch(err => console.log("Error: ", err))
+        }
+    }
