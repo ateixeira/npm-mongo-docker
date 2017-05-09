@@ -7,9 +7,10 @@ import {
 } from '../actions/actionCreators'
 
 // INITIAL STATE
-const applicationInitialState = {
+const authInitialState = {
     token: null,
     locale: 'en',
+    isAuthenticated: false,
     user: {
       permissions: []
     },
@@ -31,26 +32,27 @@ const userInitialState = {
 
 // MODAL
 function modal(state = modalInitialState, action) {
-  switch (action.type) {
-    case 'SHOW_MODAL':
-      return {
-        modalType: action.modalType,
-        modalProps: action.modalProps,
-        showModal: action.showModal
-      }
-    case 'HIDE_MODAL':
-      return modalInitialState
-    default:
-      return state
-  }
+    switch (action.type) {
+        case 'SHOW_MODAL':
+            return {
+                modalType: action.modalType,
+                modalProps: action.modalProps,
+                showModal: action.showModal
+            }
+        case 'HIDE_MODAL':
+            return modalInitialState
+        default:
+            return state
+    }
 }
 
 
-// APP
-export function application(state = applicationInitialState, action) {
+// AUTH
+export function auth(state = authInitialState, action) {
     const { type, payload } = action;
 
     switch (type) {
+        case FETCH_USERS_REQUEST:
         default:
             return state;
     } 
@@ -93,10 +95,10 @@ export function userReducer(state = userInitialState, action) {
 
 // ROOT REDUCER
 export const rootReducer = combineReducers({
-  userReducer,
-  application,
-  modal,
-  routing: routerReducer
+    userReducer,
+    auth,
+    modal,
+    routing: routerReducer
 })
 
 export default rootReducer
