@@ -20,6 +20,14 @@ module.exports = {
 
         app.use(bodyParser.urlencoded({ extended: false }))
         app.use(bodyParser.json())
+
+        // sessions configs
+        app.use(session({
+            cookieName: 'session',
+            secret: '3xp3ct0Patr0num',
+            duration: 30 * 60 * 1000,
+            activeDuration: 5 * 60 * 1000,
+        }));
         
         return app
     },
