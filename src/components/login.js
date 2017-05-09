@@ -6,6 +6,11 @@ class LoginPage extends React.Component {
         super(props);
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.login();
+    }
+
     render() {
         return (
             <div className="login">
@@ -21,7 +26,7 @@ class LoginPage extends React.Component {
                             <input type="checkbox" value="remember-me" /> Remember me
                           </label>
                         </div>
-                        <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                        <button className="btn btn-lg btn-primary btn-block" onClick={this.handleSubmit.bind(this)}>Sign in</button>
                     </form>
                 </div>
             </div>
