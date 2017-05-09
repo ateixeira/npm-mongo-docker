@@ -36,6 +36,6 @@ module.exports = {
         mongoose.set('debug', true);
     },
     auth: {
-        secret: "VtexSecr3t"
+        secret: "3xp3ct0Patr0num"
     }
 }
