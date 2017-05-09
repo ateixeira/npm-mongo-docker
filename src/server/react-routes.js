@@ -4,12 +4,16 @@ import { match, RouterContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
 
 import configureStore from '../configureStore';
-import routes from '../routes';
+import { getRoutes } from '../routes';
 
 import NotFoundPage from '../components/notfoundpage';
 
 
 module.exports = function(app){
+
+    // Create a new Redux store instance
+    const store = configureStore();
+    const routes = getRoutes(store);
 
 	// Server side rendering shared components and shared routes
 	app.get('*', (req, res) => {
@@ -26,9 +30,6 @@ module.exports = function(app){
 	            if (redirectLocation) {
 	                return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
 	            }
-
-	            // Create a new Redux store instance
-	            const store = configureStore();
 
 	            // generate the React markup for the current route
 	            let markup;

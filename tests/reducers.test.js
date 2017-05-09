@@ -55,13 +55,13 @@ describe('users reducer', () => {
 	});
 
 
+
 	it('on CREATE_USER_REQUEST, sets isCreatingUser to true', () => {
 		const action = createUserRequest();
 		const nextState = userReducer(defaultState(), action);
 		
 		expect(nextState.isCreatingUser).toBe(true);
 	});
-
 
     it('on CREATE_USER_SUCCESS, unsets isCreatingUser', () => {
 	    const state = defaultState();

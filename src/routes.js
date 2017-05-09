@@ -6,12 +6,17 @@ import Main from './components/main.js';
 import Users from './components/users.js';
 
 
-const routes = (
-	<Route path="/" component={App}>
-		<IndexRoute component={Users} />
-		<Route path="/main" component={Main}/>
-		<Route path="/users" component={Users}/>
-	</Route>
-);
+export const getRoutes = (store) => {
+	const authRequired = (nextState, replaceState) => {
+		const state = store.getState();
+	}
 
-export default routes;
+	return (
+		<Route path="/" component={App} onEnter={authRequired}>
+			<IndexRoute component={Users} />
+			<Route path="/main" component={Main}/>
+			<Route path="/users" component={Users}/>
+		</Route>
+	)
+
+}

@@ -6,6 +6,8 @@ import { syncHistoryWithStore} from 'react-router-redux';
 import routes from '../routes';
 import configureStore from '../configureStore';
 
+import { getRoutes } from '../routes';
+
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -14,7 +16,9 @@ export default class Root extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Router history={history} routes={routes}/>
+                <Router history={history} >
+                	{ getRoutes(store) }
+                </Router>
             </Provider>
         );
     }
