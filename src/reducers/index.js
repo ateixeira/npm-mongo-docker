@@ -3,13 +3,15 @@ import { routerReducer } from 'react-router-redux';
 
 import {
   FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS,
-  CREATE_USER_REQUEST, CREATE_USER_SUCCESS
+  CREATE_USER_REQUEST, CREATE_USER_SUCCESS,
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE
 } from '../actions/actionCreators'
 
 // INITIAL STATE
 const authInitialState = {
     token: null,
     locale: 'en',
+    isAuthenticating: false,
     isAuthenticated: false,
     user: {
       permissions: []
@@ -52,6 +54,26 @@ export function auth(state = authInitialState, action) {
     const { type, payload } = action;
 
     switch (type) {
+        case LOGIN_REQUEST:
+            return {
+                ...state,
+                isAuthenticating: true,
+                isAuthenticated: false
+            };
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                isAuthenticating: false,
+                isAuthenticated: true
+            };
+        case LOGIN_FAILURE:
+            return {
+                ...state,
+                isAuthenticating: false,
+                isAuthenticated: false,
+                error: action.message
+
+            };
         default:
             return state;
     } 
